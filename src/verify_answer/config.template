@@ -1,0 +1,21 @@
+files:
+
+  - path: "../../data/datasets/Math/{dataset}.json"
+    description: "Initial dataset with problem statements and answers"
+    produced_by: null
+    consumed_by: formalize.py
+
+  - path: "../../data/calculation/verify_answer/{time}/{dataset}_th.csv"
+    description: "Theorem statements formalized in Lean 4"
+    produced_by: formalize.py
+    consumed_by: qwen-structured-or-not.py
+
+  - path: "../../data/calculation/verify_answer/{time}/{dataset}_th_st.csv"
+    description: "Theorem statements formalized in Lean 4 together with structured solutions"
+    produced_by: qwen-structured-or-not.py
+    consumed_by: kimina_prover.py
+
+  - path: "../../data/result/verify_answer/{time}/{dataset}"
+    description: "Theorems with proofs"
+    produced_by: kimina_prover.py
+    consumed_by: verify_proofs.py

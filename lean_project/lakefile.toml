@@ -1,0 +1,14 @@
+name = "Ver"
+version = "0.1.0"
+defaultTargets = ["Ver"]
+
+[[lean_lib]]
+name = "Ver"
+
+[[require]]
+name = "mathlib"
+path = "./mathlib4-old"
+
+[[lean_exe]]
+name = "ver"
+root = "Main"

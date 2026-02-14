@@ -1,0 +1,8 @@
+logs/
+lean_project/lake-manifest.json
+__pycache__/
+*.log
+data/calculation
+data/result
+config.yaml
+config_old.yaml

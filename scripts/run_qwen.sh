@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0,1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True python -m vllm.entrypoints.api_server   --model /mnt/compression/pytorch/qwen3-8b   --dtype half   --host 0.0.0.0   --port 8000   --tensor-parallel-size 2   --gpu-memory-utilization 0.9 --reasoning-parser qwen3 --max-model-len 32768

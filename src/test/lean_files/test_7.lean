@@ -1,0 +1,1 @@
+theorem t: ab:cd:ef

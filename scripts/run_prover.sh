@@ -1,0 +1,1 @@
+ CUDA_VISIBLE_DEVICES=0,1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True python -m vllm.entrypoints.api_server   --model /mnt/compression/pytorch/Kimina-Prover-Preview-Distill-7B --max-num-seqs 10 --dtype half   --host 0.0.0.0   --port 8000   --tensor-parallel-size 2   --gpu-memory-utilization 0.95

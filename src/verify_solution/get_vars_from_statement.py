@@ -64,7 +64,7 @@ def get_vars(problem):
 def get_text_prompt_with_variables(modified_row):
     problem, variable, kind_of_stat = modified_row
     
-    prompt = f"You are a math expert. For the following {kind_of_stat} and variable, determine the type of the variable and whether it is a mathematical constant."
+    prompt = f"You are a math expert. For the following {kind_of_stat} and variable, determine the type of the variable and whether it is a mathematical constant, but do not solve the {kind_of_stat}."
     prompt += r"""
 I will give you examples of types and definitions:
 

@@ -31,6 +31,23 @@ def correct(theorems, lemmas):
         theorem = correct_func(theorem).replace('<->','↔').replace('->','→')
         yield theorem
 
+def check(formalization, statement, gt_answer):
+    answer = 'e'
+    while answer=='e':
+        answer = ''
+        print(f'Theorem statement: {statement}\nAnswer: {gt_answer}\n\nFormalization:\n\n{formalization}\n\n')
+        while answer not in ('y', 'n', 'e'):
+            answer = input('''Check the formalization of the problem. Write:
+"y" (yes), if the formalization is correct
+"e" (edit), if there were mistakes with formalization
+"n" (no), if the formalization is incorrect
+'''
+            )
+            if answer == 'e':
+                print('Enter new statement, press Enter and then Ctrl+D')
+                formalization = stdin.read()
+    return answer == 'y', formalization
+
 input_lemma = get_input_file_or_folder('./config.yaml', 1)
 input_file = get_input_file_or_folder('./config.yaml', 0)
 output_file = get_output_file_or_folder('./config.yaml')
@@ -42,5 +59,12 @@ df = pd.read_csv(input_file)
 lemmas = pd.read_csv(input_lemma)
 lemmas = lemmas[['task_number', 'formula_dict']]
 df['theorem'] = list(correct(df['theorem'], lemmas))
-df['correct'] = True
+df['check'] = False
+df['correct'] = False
+for i, row in df.iterrows():
+    ret, formalization = check(row['theorem'], row['problem'], row['answer'])
+    if ret:
+        df.at[i, 'check'] = True
+        df.at[i, 'correct'] = True
+        df.at[i, 'theorem'] = formalization
 df.to_csv(output_file, index = False)

@@ -9,7 +9,7 @@ and then summarize your solution in propositional logic so that it
 satisfies the following criteria: The solution should be split into several easy to understand steps, 
 each written in propositional logic as A_1 ∧ ... ∧ A_n -> B as a set of premises (explicitly stated, not as A_i) and one conclusion. 
 You should include all relevant premises so that the proposition is true without previous context. Do not write text comments in the solution. Your summary should be in latex code.
-Once you have obtained the necessary steps, stop thinking mode and put your summary between
+Once you have obtained the necessary steps, stop thinking mode and put your summary between 
 ### Summary in Propositional Logic
 and
 ### End of Summary
@@ -54,8 +54,8 @@ prompt_with_introduced = r"""You are a math expert. Please solve the following p
 and then summarize your solution in propositional logic so that it 
 satisfies the following criteria: The solution should be split into several easy to understand steps, 
 each written in propositional logic as A_1 ∧ ... ∧ A_n -> B as a set of premises (explicitly stated, not as A_i) and one conclusion. 
-You should include all relevant premises so that the proposition is true without previous context. Your summary should be in latex code.
-Once you have obtained the necessary steps, stop thinking mode and put your summary between
+You should include all relevant premises so that the proposition is true without previous context. Your summary should be in latex code. 
+Once you have obtained the necessary steps, stop thinking mode and put your summary between 
 ### Summary in Propositional Logic
 and
 ### End of Summary
@@ -97,6 +97,13 @@ Summary:
 3. $ 3^(3x) = 3^4 $ -> $ 3x = 4 $
 4. $ 3x = 4 $ -> $ x = \frac{4}{3} $
 end of example section
+
+Put your summary between 
+### Summary in Propositional Logic
+and
+### End of Summary
+headers.
+
 """
 
 def get_text_prompt(row_modified):

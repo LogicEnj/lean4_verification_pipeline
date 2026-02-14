@@ -189,6 +189,10 @@ for task_index, row in theorems.iterrows():
         with open(os.path.join(output_dir, f'task-{task_index}-inv.lean'), 'w', encoding = 'utf-8') as proof_file:
             proof_file.write(proof)
 
+    if not row['checked'].endswith('TRUE'):
+        for i in range(len_tactics):
+            os.system('touch ' + os.path.join(output_dir, f'task-{task_index}-{i}.lean'))
+        continue
 
     proof = row['header'] + row['direct']
 
@@ -199,17 +203,10 @@ for task_index, row in theorems.iterrows():
         for fact_index in local_fact_indices:
             print(f'Fact {lemma_index}_{fact_index}')
             fact_filename = f'fact_{task_index}_{lemma_index}_{fact_index}.lean'
-            fact_path = os.path.join(input_dir, fact_filename)
-            with open(fact_path, 'r', encoding = 'utf-8') as fact_file:
+            with open(os.path.join(input_dir, fact_filename), 'r', encoding = 'utf-8') as fact_file:
                 fact_stat = fact_file.read()
-            with open(fact_path[:-5]+'.err', 'r', encoding = 'utf-8') as err_file:
-                if err_file.read().endswith('TRUE'):
-                    unused_names, fact_stat = del_absolete_hypotheses(client, fact_stat, fact_filename)
-                else:
-                    unused_names = []
+            unused_names, fact_stat = del_absolete_hypotheses(client, fact_stat, fact_filename)
             find = lemma_lookup.search(fact_stat)
-            if not find:
-                continue
             line = find[0]
             find_stat = re.search(r'theorem[^{(:]*', line)
             start_ind = find_stat.end()
@@ -233,17 +230,10 @@ for task_index, row in theorems.iterrows():
 
         print(f'Lemma {lemma_index}')
         lemma_filename = f'thm_{task_index}_{lemma_index}.lean'
-        lemma_path = os.path.join(input_dir, lemma_filename)
-        with open(lemma_path, 'r', encoding = 'utf-8') as lemma_file:
+        with open(os.path.join(input_dir, lemma_filename), 'r', encoding = 'utf-8') as lemma_file:
             lemma_stat = lemma_file.read()
-        with open(lemma_path[:-5] + '.err', 'r', encoding = 'utf-8') as err_file:
-            if err_file.read().endswith('TRUE'):
-                unused_names, lemma_stat = del_absolete_hypotheses(client, lemma_stat, lemma_filename)
-            else:
-                unused_names = []
+        unused_names, lemma_stat = del_absolete_hypotheses(client, lemma_stat, lemma_filename)
         find = lemma_lookup.search(lemma_stat)
-        if not find:
-            continue
         line = find[0]
         find_stat = re.search(r'theorem[^{(:]*', line)
         start_ind = find_stat.end()

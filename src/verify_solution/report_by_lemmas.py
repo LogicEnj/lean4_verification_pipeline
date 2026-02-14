@@ -142,6 +142,9 @@ html = '''
   .lemma-cell-red {
     background-color: #ff9999;
   }
+  .lemma-cell-violet {
+    background-color: #d0b0e0;
+  }
   .final-theorem-green {
     background-color: #ccffcc;
   }
@@ -194,10 +197,12 @@ for problem in data:
         error = escape_html(lemma.get('error', ''))
         name = lemma.get('name', '')
 
-        if error.endswith('TRUE'):
-            lemma_color = 'green'
-        else:
+        if 'NO FILE' in proved:
             lemma_color = 'red'
+        elif 'sorry' in proved:
+            lemma_color = 'violet'
+        else:
+            lemma_color = 'green'
 
         html += f'''
         <tr class="lemma-row">

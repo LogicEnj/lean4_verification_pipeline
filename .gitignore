@@ -6,3 +6,4 @@ data/calculation
 data/result
 config.yaml
 config_old.yaml
+.DS_Store

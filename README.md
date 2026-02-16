@@ -44,7 +44,8 @@ pip install pandas
 ```
 
 6. Set absolute paths to Qwen, Kimina-Prover, Kimina-Autoformalizer in src/custom_tools/model_tokenizer.py, scripts/run_formalizer.sh, scripts/run_prover.sh, scripts/run_qwen.sh
-The pipeline is configured to work with Qwen3-8B, Kimina-Autoformalizer-7B, Kimina-Prover-Preview-Distill-7B
+
+The pipeline is configured to work with Qwen3-8B, Kimina-Autoformalizer-7B, Kimina-Prover-Preview-Distill-7B, and [this Mathlib version](https://github.com/leanprover-community/mathlib4/tree/ecd33ba785aacf04b696fd0763a8f51e27197ec9) that was copied in /lean_project/mathlib-old
 
 # Verifying answers
 
@@ -54,7 +55,7 @@ The pipeline is configured to work with Qwen3-8B, Kimina-Autoformalizer-7B, Kimi
 cd src/verify_answer
 ```
 
-2. Select dataset from {easy, similar, Math-500} (or add your own dataset with name <name> with path data/datasets/Math/<name>.json) to generate formal proofs for problems in this dataset:
+2. Select dataset from {easy, similar, Math-500} (or add your own dataset with name \<name\> with path data/datasets/Math/\<name\>.json) to generate formal proofs for problems in this dataset:
 
 ```bash
 ./verify_answer.sh easy
@@ -64,7 +65,7 @@ cd src/verify_answer
 
 ./verify_proofs.sh
 
-You can find the intermediate results in data/calculation/verify_answer/<time>. Final results in data/result/verify_answer/<time>/<dataset>. (<time> is the time of starting the pipeline, <dataset> is the dataset name)
+You can find the intermediate results in data/calculation/verify_answer/\<time\>. Final results in data/result/verify_answer/\<time\>/\<dataset\>. (\<time\> is the time of starting the pipeline, \<dataset\> is the dataset name)
 
 # Verifying solutions
 
@@ -74,14 +75,14 @@ You can find the intermediate results in data/calculation/verify_answer/<time>. 
 cd src/verify_solution
 ```
 
-2. Select dataset from {easy, similar, Math-500} and run verification pipeline for this dataset (or add your own dataset with name <name> with path data/datasets/Math/<name>.json):
+2. Select dataset from {easy, similar, Math-500} and run verification pipeline for this dataset (or add your own dataset with name \<name\> with path data/datasets/Math/\<name\>.json):
 
 ```bash
 ./verify_solution.sh similar 1
 ```
 There similar is the dataset name, 1 indicates that qwen should introduce variables to solve the problem (when 0 indicates that qwen should not introduce variables to solve the problem)
 
-You can find the intermediate results in data/calculation/<time>. Final results in data/result/verify_solution/<time>/<dataset>. (<time> is the time of starting the pipeline, <dataset> is the dataset name)
+You can find the intermediate results in data/calculation/\<time\>. Final results in data/result/verify_solution/\<time\>/\<dataset\>. (\<time\> is the time of starting the pipeline, \<dataset\> is the dataset name)
 
 # A/B Testing of solution verification pipeline
 
@@ -91,7 +92,7 @@ You can find the intermediate results in data/calculation/<time>. Final results 
 cd src/verify_solution
 ```
 
-2. Select first branch and a dataset from {easy, similar, Math-500} and run verification pipeline (argument for verify_solution.sh are described in "Verifying solutions" section) for this dataset (or add your own dataset with name <name> with path data/datasets/Math/<name>.json):
+2. Select first branch and a dataset from {easy, similar, Math-500} and run verification pipeline (argument for verify_solution.sh are described in "Verifying solutions" section) for this dataset (or add your own dataset with name \<name\> with path data/datasets/Math/\<name\>.json):
 
 ```bash
 git checkout branch_A
